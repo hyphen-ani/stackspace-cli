@@ -4,6 +4,7 @@ import inquirer from "inquirer";
 import chalk from "chalk";
 import {Command} from "commander";
 import {showStackSpaceInfo} from './info.js'
+import {promptCacheSettings} from "./cli-prompts/propmtCacheSettings.js";
 //
 // const inquirer = require("inquirer");
 // const chalk = require('chalk');
@@ -85,38 +86,13 @@ async function main(){
         },
     ]);
 
-
-    const { enableCache } = await inquirer.prompt([
-        {
-            type: 'confirm',
-            name: 'enableCache',
-            message: 'Do you want to enable caching for your application?',
-            default: false,
-        }
-    ]);
-
-    if(enableCache){
-        const { cacheMethodChoice } = await inquirer.prompt([
-            {
-                type: 'list',
-                name: 'cacheMethod',
-                message: 'Which cache method would you like to use?',
-                choices: ['Redis', 'Memcached'],
-            },
-
-        ]);
-    }
+    await promptCacheSettings();
 
 
     // Display final information
     console.log(chalk.green(`\nYou have configured the following settings for ${stackName}:`));
     console.log(`Cloud Provider: ${cloudProvider}`);
     console.log(`Database Mode: ${databaseMode}`);
-    if (enableCache) {
-        console.log(`Caching has been enabled for your application.`);
-    }else{
-        console.log('Caching has been disabled for your application.');
-    }
     console.log(chalk.yellow('\nYour stackspace project is ready to go! 🚀'));
 }
 
