@@ -1,7 +1,9 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 import promptCacheSettings from "../../cli-prompts/propmtCacheSettings.js";
-
+import fs from 'fs';
+import path from 'path';
+import ora from "ora";
 export async function createStack(){
     console.log(chalk.blue('Welcome to stackspace 🎉 - The Dynamic Database Solution for Modern Applications.'))
 
@@ -32,9 +34,11 @@ export async function createStack(){
         },
     ]);
 
+    let cloudConfig = {};
+
     switch (cloudProvider) {
         case 'AWS':
-            await inquirer.prompt([
+            cloudConfig = await inquirer.prompt([
                 { type: 'input', name: 'awsAccessKey', message: 'Enter AWS Access Key ID:' },
                 { type: 'password', name: 'awsSecretKey', message: 'Enter AWS Secret Access Key:' },
                 { type: 'input', name: 'region', message: 'Enter AWS region (e.g., us-east-1):' },
@@ -42,14 +46,14 @@ export async function createStack(){
             break;
 
         case 'Google Cloud Platform':
-            await inquirer.prompt([
+            cloudConfig = await inquirer.prompt([
                 { type: 'input', name: 'gcpKey', message: 'Provide your GCP service account key (JSON):' },
                 { type: 'input', name: 'region', message: 'Enter GCP region (e.g., us-central1):' },
             ]);
             break;
 
         case 'Microsoft Azure':
-            await inquirer.prompt([
+            cloudConfig = await inquirer.prompt([
                 { type: 'input', name: 'subscriptionId', message: 'Enter Azure Subscription ID:' },
                 { type: 'input', name: 'tenantId', message: 'Enter Azure Tenant ID:' },
                 { type: 'input', name: 'clientId', message: 'Enter Azure Client ID:' },
@@ -70,15 +74,61 @@ export async function createStack(){
 
     await promptCacheSettings();
 
+    const stackData = {
+        stackName,
+        cloudProvider,
+        cloudConfig,
+        databaseMode,
+        createdAt: new Date().toISOString(),
+    };
+
+    console.log("-------------------------------------------------------------------------------");
+
+    const spinner = ora(`Saving configuration for stack "${stackName}"...`).start();
+    try {
+        await new Promise((resolve) => setTimeout(resolve, 6000));
+        await saveConfig(stackName, stackData);
+        spinner.succeed(`Configuration for stack "${stackName}" saved successfully!`);
+    } catch (err) {
+        spinner.fail("Failed to save configuration. Please try again.");
+        console.error(chalk.red("Error:", err));
+    }
+
+    console.log("-------------------------------------------------------------------------------");
 
     // Display final information
     console.log(chalk.green(`\nYou have configured the following settings for ${stackName}:`));
     console.log(`Cloud Provider: ${cloudProvider}`);
     console.log(`Database Mode: ${databaseMode}`);
     console.log(chalk.yellow('\nYour stackspace project is ready to go! 🚀'));
+    
+}
+
+const configFile = path.resolve(process.cwd(), 'stackspace_config.json');
+
+async function saveConfig(stackName, data) {
+    let configs = {};
+
+    try{
+        if(fs.existsSync(configFile)){
+            configs = JSON.parse(fs.readFileSync(configFile));
+        }
+    }catch (err){
+        console.error(chalk.red("Failed to read configuration file:", err));
+    }
+
+    configs[stackName] = data;
+
+    try{
+        fs.writeFileSync(configFile, JSON.stringify(configs, null, 2));
+        console.log(chalk(`Configuration saved for stack ${stackName}`))
+    }catch (err) {
+        console.error(chalk.red("Failed to save configuration file:", err));
+    }
 }
 
 createStack().catch((err) => {
     console.error(chalk.red(`An error occured:`, err));
     process.exit(1);
 });
+

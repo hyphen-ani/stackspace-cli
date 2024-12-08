@@ -9,8 +9,14 @@ const program = new Command();
 showStackSpaceInfo();
 
 program
-    .command('create @new_stack')
+    .command('create')
     .version("1.0.0-alpha_release")
     .description("Create a new Stackspace project.")
     .action(() =>  createStack())
 
+program
+    .command('list-stacks')
+    .description('Lists all stackspace projects')
+    .action(() => {
+        console.log('Listing all stackspace projects')
+    })
