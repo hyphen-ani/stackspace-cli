@@ -18,7 +18,7 @@
     "inquirer": "^12.1.0"
   },
   "bin": {
-    "stackspace": "./cli/cli-prompt.js"
+    "stackspace": "src/cli.js"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",

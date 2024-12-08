@@ -3,12 +3,8 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 import {Command} from "commander";
-import {showStackSpaceInfo} from './info.js'
-import {promptCacheSettings} from "./cli-prompts/propmtCacheSettings.js";
-//
-// const inquirer = require("inquirer");
-// const chalk = require('chalk');
-// const { Command } = require('commander');
+import {showStackSpaceInfo} from './cli-prompts/info.js'
+import promptCacheSettings from "./cli-prompts/propmtCacheSettings.js";
 
 const program = new Command();
 

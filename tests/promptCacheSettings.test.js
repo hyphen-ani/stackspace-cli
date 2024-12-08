@@ -1,6 +1,6 @@
 import { jest, describe, it, expect } from '@jest/globals';
 import inquirer from 'inquirer';
-import promptCacheSettings from '../cli/cli-prompts/propmtCacheSettings';
+import promptCacheSettings from '../src/cli-prompts/propmtCacheSettings';
 describe('promptCacheSettings', () => {
     it('should return correct object when caching is enabled', async () => {
         // Mock the first and second prompt calls
