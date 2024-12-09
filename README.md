@@ -131,22 +131,22 @@ We welcome contributions to Stackspace! If you'd like to help improve the projec
 
 1. Fork the repository.
 2. Clone your fork:
-    bash
-   ```git clone https://github.com/yourusername/stackspace.git```
+   ```bash
+   git clone https://github.com/yourusername/stackspace.git
+   
+3. Create a new branch for your changes:
+   ```bash
+   git checkout -b your-branch-name
 
-2. Create a new branch for your changes:
-  bash
-  ```git checkout -b your-branch-name```
+4. Make your changes and commit them:
+   ```bash
+   git commit -m "Description of your changes"
 
-3. Make your changes and commit them:
-  bash
-  ```git commit -m "Description of your changes"```
+5. Push to your fork:
+   ```bash
+   git push origin your-branch-name
 
-4. Push to your fork:
-  bash
-  ```git push origin your-branch-name```
-
-5. Create a pull request from your branch to the main repository.
+6. Create a pull request from your branch to the main repository.
 
 
 ### Code of Conduct
