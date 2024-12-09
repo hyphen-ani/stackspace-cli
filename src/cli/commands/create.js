@@ -4,7 +4,9 @@ import promptCacheSettings from "../../cli-prompts/propmtCacheSettings.js";
 import fs from 'fs';
 import path from 'path';
 import ora from "ora";
+import {showStackSpaceInfo} from "../../cli-prompts/info.js";
 export async function createStack(){
+    showStackSpaceInfo();
     console.log(chalk.blue('Welcome to stackspace 🎉 - The Dynamic Database Solution for Modern Applications.'))
 
     const { stackName } = await inquirer.prompt([
@@ -126,9 +128,3 @@ async function saveConfig(stackName, data) {
         console.error(chalk.red("Failed to save configuration file:", err));
     }
 }
-
-createStack().catch((err) => {
-    console.error(chalk.red(`An error occured:`, err));
-    process.exit(1);
-});
-

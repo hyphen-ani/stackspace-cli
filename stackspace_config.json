@@ -1,0 +1,13 @@
+{
+  "demo_stack": {
+    "stackName": "demo_stack",
+    "cloudProvider": "AWS",
+    "cloudConfig": {
+      "awsAccessKey": "ladfbla",
+      "awsSecretKey": "fbladkgb",
+      "region": "ap-south-1b"
+    },
+    "databaseMode": "Relational (PostgreSQL, MySQL)",
+    "createdAt": "2024-12-09T00:10:39.001Z"
+  }
+}
