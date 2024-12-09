@@ -1,5 +1,4 @@
-
-
+![Stackspace Logo](./stackspace.png)
 
 # Stackspace
 
