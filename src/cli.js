@@ -29,4 +29,15 @@ program
     });
 
 program.exitOverride();
+
+program.on('command:*', () => {
+    console.error(chalk.red('Invalid command entered!'));
+    process.exit(1);
+});
+
+if (process.argv.length <= 2) {
+    console.error(chalk.yellow('No command provided! Please use a valid command like "create" or "list-stacks".'));
+    process.exit(1);
+}
+
 program.parse(process.argv);
