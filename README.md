@@ -158,7 +158,7 @@ Stackspace is licensed under the MIT License.
 ### Contact
 For any questions or inquiries, feel free to reach out:
 
-GitHub Issues: https://github.com/hyphen-ani/stackspace/issues
+GitHub Issues: https://github.com/hyphen-ani/stackspace-cli/issues
 
-Regards,
-Stackspace Team
+**Regards,
+Stackspace Team**
