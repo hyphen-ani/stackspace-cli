@@ -28,7 +28,12 @@ program
         ListStacks();
     });
 
-program.exitOverride();
+program
+    .command('--help')
+    .description('Shows Help')
+    .action( () => {
+        console.log("Help is here")
+    });
 
 program.on('command:*', () => {
     console.error(chalk.red('Invalid command entered!'));
