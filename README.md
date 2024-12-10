@@ -30,11 +30,11 @@ To use Stackspace, ensure that you have **Node.js** and **npm** installed. If no
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/stackspace.git
+   git clone https://github.com/hyphen-ani/stackspace-cli.git
 
 2. Navigate to the project folder:
    ```bash
-   cd stackspace
+   cd stackspace-cli
 
 3. Install the required dependencies:
    ```bash
